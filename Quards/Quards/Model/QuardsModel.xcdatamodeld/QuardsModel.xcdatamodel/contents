@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17189" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Card" representedClassName=".Card" syncable="YES">
+        <attribute name="back" attributeType="Binary" valueTransformerName=""/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="front" attributeType="Binary"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="spacedRep" maxCount="1" deletionRule="Nullify" destinationEntity="SRepData" inverseName="card" inverseEntity="SRepData"/>
+        <relationship name="tagDeck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TagDeck" inverseName="cards" inverseEntity="TagDeck"/>
+    </entity>
+    <entity name="SRepData" representedClassName=".SRepData" syncable="YES">
+        <attribute name="averageReviewTime" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="includeInDailyReview" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="interval" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="nextDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="numReps" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="card" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="spacedRep" inverseEntity="Card"/>
+    </entity>
+    <entity name="TagDeck" representedClassName="TagDeck" syncable="YES">
+        <attribute name="color" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName"/>
+        <attribute name="createdAt" attributeType="Date" defaultDateTimeInterval="620565420" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
+        <relationship name="cards" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="tagDeck" inverseEntity="Card"/>
+        <relationship name="children" toMany="YES" deletionRule="Nullify" destinationEntity="TagDeck" inverseName="parent" inverseEntity="TagDeck"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TagDeck" inverseName="children" inverseEntity="TagDeck"/>
+    </entity>
+    <elements>
+        <element name="Card" positionX="-54" positionY="9" width="128" height="133"/>
+        <element name="SRepData" positionX="-63" positionY="45" width="128" height="133"/>
+        <element name="TagDeck" positionX="-54" positionY="63" width="128" height="148"/>
+    </elements>
+</model>
